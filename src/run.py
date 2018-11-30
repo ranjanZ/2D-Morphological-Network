@@ -158,8 +158,11 @@ def main(input_dir="../data/input_images/",output_dir="../data/output/"):
 #save_all_results()
 
 #to run it on other dataset
-main(input_dir="../data/input_images/",output_dir="../data/output/")
-
+#main(input_dir="../data/input_images/",output_dir="../data/output/")
+if(len(sys.argv)==3):
+    main(input_dir=sys.argv[1],output_dir=sys.argv[2])
+else:
+    main(input_dir="../data/input_images/",output_dir="../data/output/")
 
 
 
