@@ -12,33 +12,33 @@ def train_all_models(num_epochs=1000):
   
     #train CNN
     model_cnn=model_CNN()
-    model_cnn.compile(loss=loss_new, optimizer="RMSprop",metrics=[SSIM(kernel_size=100)])
+    model_cnn.compile(loss=loss_new, optimizer="adam",metrics=[SSIM(kernel_size=100)])
     model_cnn.fit_generator(gen,epochs=num_epochs)
     model_cnn.save_weights("../models/model_cnn.h5")
     
     #train path1	
     path1=model_path1()
-    path1.compile(loss=loss_new, optimizer="RMSprop",metrics=[SSIM(kernel_size=100)])
+    path1.compile(loss=loss_new, optimizer="adam",metrics=[SSIM(kernel_size=100)])
     path1.fit_generator(gen,epochs=num_epochs)
     path1.save_weights("../models/path1.h5")
 
   
     #train path2	
     path2=model_path2()
-    path2.compile(loss=loss_new, optimizer="RMSprop",metrics=[SSIM(kernel_size=100)])
+    path2.compile(loss=loss_new, optimizer="adam",metrics=[SSIM(kernel_size=100)])
     path2.fit_generator(gen,epochs=num_epochs)
     path2.save_weights("../models/path2.h5")
 
 
     #tain morphoN
     morphoN=model_morphoN()
-    morphoN.compile(loss=loss_new, optimizer="RMSprop",metrics=[SSIM(kernel_size=100)])
+    morphoN.compile(loss=loss_new, optimizer="adam",metrics=[SSIM(kernel_size=100)])
     morphoN.fit_generator(gen,epochs=num_epochs)
     morphoN.save_weights("../models/MorphoN.h5")
 
     #train morphoN small
     morphoN_small=model_morphoN_small()
-    morphoN_small.compile(loss=loss_new, optimizer="RMSprop",metrics=[SSIM(kernel_size=100)])
+    morphoN_small.compile(loss=loss_new, optimizer="adam",metrics=[SSIM(kernel_size=100)])
     morphoN_small.fit_generator(gen,epochs=num_epochs)
     morphoN_small.save_weights("../models/MorphoN_small.h5")
 
