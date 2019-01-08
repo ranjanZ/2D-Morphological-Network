@@ -28,9 +28,9 @@ $python run.py ../data/input_images/ ../data/output/
 ```
 ├── data
 │   ├── input_images
-│   │   └── GT_p2.jpg
+│   │   └── 52_in.png
 │   └── output
-│       ├── GT_p23cnn.jpg
+│       ├── 52_4small.png
 │       └── GT_p2small_morpho_net_.jpg
 ├── models
 │   ├── model_cnn.h5
