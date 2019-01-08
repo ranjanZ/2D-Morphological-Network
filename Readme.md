@@ -7,7 +7,7 @@
 ## Dependency
 * For Running
     * Python2
-    * keras
+    * keras(tensorflow-backend with channel last)
     * scipy
     * numpy
     * scikit-image
