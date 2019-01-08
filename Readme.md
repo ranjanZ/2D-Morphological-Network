@@ -57,3 +57,6 @@ $python run.py ../data/input_images/ ../data/output/
 ## Publication
 Ranjan Mondal,Pulak Purkiat, Sanchayan Santra and Bhabatosh Chanda. "Morphological Networks for Image De-raining" Discrete Geometry for Computer Imagery, 2019
 
+
+#If you are using this code please cite the paper
+
