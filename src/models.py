@@ -1,39 +1,17 @@
 import os,sys
-from keras.engine.topology import Layer
 import numpy as np
-from keras.layers import initializers,constraints
-import tensorflow as tf
 from keras.models import Sequential,Model
-from keras.utils import conv_utils
-from keras import backend as K
 import numpy as np
-from keras.layers import Dense, Dropout, Flatten,Input
-from keras.layers import Conv2D, MaxPooling2D,Concatenate
-from keras.optimizers import SGD
 import matplotlib.pyplot as plt
 from keras_contrib.losses import DSSIMObjective
-from keras.constraints import *
-#from morph_dense import *
-from sklearn.datasets import  make_circles
-from sklearn import datasets
-from keras.layers import Activation, Dense,Dropout
-import pandas
 from utils import *
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import StratifiedKFold
-from keras.callbacks import ModelCheckpoint
 from morph_layers2D import *
-from matplotlib.colors import ListedColormap
-import keras
 from generator import *
-from keras.layers import maximum
-from skimage.morphology import erosion, dilation, opening, closing, white_tophat
-from skimage.morphology import disk,rectangle
 from skimage.measure import compare_ssim as ssim
 from skimage.measure import compare_psnr as psnr
+from keras.layers import Conv2D, BatchNormalization, MaxPooling2D, UpSampling2D, Add, Dropout, concatenate,Dense,Input
 
-from keras.layers import Conv2D, BatchNormalization, MaxPooling2D, UpSampling2D, Add, Dropout, concatenate
-import time
+
 
 
 

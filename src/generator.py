@@ -2,17 +2,13 @@
 import skimage.transform
 from keras.utils import Sequence
 import numpy as np
-import cv2
-import glob
-import pandas as pd
+#import cv2
 import os
 from scipy import misc
 from skimage.transform import  resize
 from init import *
 
 
-#DATA_PATH="/home/ranjan/work/morph_Network/data/DGCI/rainy-image-dataset/"
-#DATA_PATH="/media/ranjan/18E6974F7BA7A40E/data/RAIN/rainy-image-dataset/"
 
 
 

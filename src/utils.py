@@ -1,20 +1,13 @@
 #####################################################
 import numpy as np
-#from  simple_NN import *
-from tensorflow.examples.tutorials.mnist import input_data
 import os
-import re
 import pandas
 import matplotlib.patches as mpatches
 from keras_contrib.losses import DSSIMObjective
 import keras.backend as K
-import tensorflow as tf
 from keras.objectives import *
 import keras_contrib.backend as KC
 
-# coding=utf-8
-from keras import Input, Model
-from keras.layers import Conv2D, BatchNormalization, MaxPooling2D, UpSampling2D, Add, Dropout, concatenate
 
 
 
