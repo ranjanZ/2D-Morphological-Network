@@ -20,7 +20,8 @@ $ python run.py  <rainy_image_dir>   <output_dir>
 ```
 This runs the code in the supplied images.
 ```
-$python main.py  ../data/hazy_img/ ../data/out/
+$python run.py ../data/input_images/ ../data/output/
+
 ```
 
 ## Files
