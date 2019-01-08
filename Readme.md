@@ -2,7 +2,7 @@
 
 | Input        | De-Rained      | 
 |:-------------:|:-------------:|
-| ![input](https://raw.githubusercontent.com/ranjanZ/2D-Morphological-Network/master/data/output/GT_p23cnn.jpg)| ![De-Rained](https://raw.githubusercontent.com/ranjanZ/2D-Morphological-Network/master/data/output/GT_p23cnn.jpg) |
+| ![input](https://raw.githubusercontent.com/ranjanZ/2D-Morphological-Network/master/data/input_images/52_in.png)| ![De-Rained](https://raw.githubusercontent.com/ranjanZ/2D-Morphological-Network/master/data/output/52_4small.png) |
 
 ## Dependency
 * For Running
