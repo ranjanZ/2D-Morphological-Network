@@ -27,12 +27,12 @@ $python run.py ../data/input_images/ ../data/output/
 ## Files
 ```
 ├── data
-│   ├── input_images
+│   ├── input_images				
 │   │   └── 52_in.png
 │   └── output
 │       ├── 52_4small.png
 │       └── GT_p2small_morpho_net_.jpg
-├── models
+├── models				  #all  the Trained model weights saved here
 │   ├── model_cnn.h5
 │   ├── MorphoN.h5
 │   ├── MorphoN_small.h5
@@ -45,12 +45,12 @@ $python run.py ../data/input_images/ ../data/output/
 │   └── weights_path2.h5
 ├── Readme.md
 └── src
-    ├── generator.py
-    ├── init.py
-    ├── models.py
-    ├── morph_layers2D.py
-    ├── run.py
-    └── utils.py
+    ├── generator.py                      #generates Data for training
+    ├── init.py                           #place Rainy dataset here For training
+    ├── models.py                         #All the Defination of model
+    ├── morph_layers2D.py                 #2D morphological Network
+    ├── run.py				  #main run file 
+    └── utils.py			  #other files
 
 ```
 
