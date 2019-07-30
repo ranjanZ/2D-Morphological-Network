@@ -1,0 +1,6 @@
+morph-net:
+  build: .
+  dockerfile: Dockerfile
+  volumes:
+    - .:/opt/app
+  working_dir: /opt/app
