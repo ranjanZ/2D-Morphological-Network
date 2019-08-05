@@ -1,3 +1,7 @@
+# Data
+data/train_data
+data/output
+
 # Backup files
 *~
 
