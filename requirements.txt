@@ -3,6 +3,8 @@ scipy==1.2.2
 scikit-image==0.14.3
 matplotlib==2.2.4
 tensorflow==1.14
+tensorflow-gpu==1.14
 keras==2.2.4
 pandas==0.24.2
+dask==1.2.2
 git+https://www.github.com/keras-team/keras-contrib.git
