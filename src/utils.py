@@ -1,7 +1,6 @@
 #####################################################
 import numpy as np
 import os
-import pandas
 import matplotlib.patches as mpatches
 from keras_contrib.losses import DSSIMObjective
 import keras.backend as K

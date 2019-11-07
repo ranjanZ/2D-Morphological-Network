@@ -12,7 +12,7 @@
     * numpy
     * scikit-image
     * matplotlib
-
+    * imageio
 ## Running
 ```
 $ cd src/
