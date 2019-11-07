@@ -9,20 +9,10 @@ from keras.objectives import *
 import keras_contrib.backend as KC
 
 
-
-
-
-def loss_new(y_true,y_pred):
-    loss=DSSIMObjective(kernel_size=100)(y_true,y_pred)   + K.mean(K.abs(y_true-y_pred))
+def loss_new(y_true, y_pred):
+    loss = DSSIMObjective(kernel_size=100)(
+        y_true, y_pred) + K.mean(K.abs(y_true-y_pred))
     return loss
-
-
-
-
-
-
-
-
 
 
 class SSIM():
@@ -60,8 +50,10 @@ class SSIM():
         y_true = KC.reshape(y_true, [-1] + list(self.__int_shape(y_pred)[1:]))
         y_pred = KC.reshape(y_pred, [-1] + list(self.__int_shape(y_pred)[1:]))
 
-        patches_pred = KC.extract_image_patches(y_pred, kernel, kernel, 'valid', self.dim_ordering)
-        patches_true = KC.extract_image_patches(y_true, kernel, kernel, 'valid', self.dim_ordering)
+        patches_pred = KC.extract_image_patches(
+            y_pred, kernel, kernel, 'valid', self.dim_ordering)
+        patches_true = KC.extract_image_patches(
+            y_true, kernel, kernel, 'valid', self.dim_ordering)
 
         # Reshape to get the var in the cells
         bs, w, h, c1, c2, c3 = self.__int_shape(patches_pred)
@@ -74,18 +66,12 @@ class SSIM():
         var_true = K.var(patches_true, axis=-1)
         var_pred = K.var(patches_pred, axis=-1)
         # Get std dev
-        covar_true_pred = K.mean(patches_true * patches_pred, axis=-1) - u_true * u_pred
+        covar_true_pred = K.mean(
+            patches_true * patches_pred, axis=-1) - u_true * u_pred
 
-        ssim = (2 * u_true * u_pred + self.c1) * (2 * covar_true_pred + self.c2)
-        denom = (K.square(u_true) + K.square(u_pred) + self.c1) * (var_pred + var_true + self.c2)
+        ssim = (2 * u_true * u_pred + self.c1) * \
+            (2 * covar_true_pred + self.c2)
+        denom = (K.square(u_true) + K.square(u_pred) + self.c1) * \
+            (var_pred + var_true + self.c2)
         ssim /= denom  # no need for clipping, c1 and c2 make the denom non-zero
         return K.mean(ssim)
-
-
-
-
-
-
-
-
-

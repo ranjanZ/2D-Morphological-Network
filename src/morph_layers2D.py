@@ -2,7 +2,8 @@ import os
 #os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 from keras.engine.topology import Layer
 import numpy as np
-from keras.layers import initializers,constraints
+#from keras.layers import initializers, constraints
+from keras import initializers, constraints
 import tensorflow as tf
 from keras.models import Sequential
 from keras.utils import conv_utils
@@ -14,15 +15,15 @@ from keras.optimizers import SGD
 import matplotlib.pyplot as plt
 
 
-
 class Erosion2D(Layer):
     '''
     Erosion 2D Layer
     for now assuming channel last
     '''
+
     def __init__(self, num_filters, kernel_size, strides=(1, 1),
                  padding='valid', kernel_initializer='glorot_uniform',
-		 kernel_constraint=None,
+                 kernel_constraint=None,
                  **kwargs):
         super(Erosion2D, self).__init__(**kwargs)
         self.num_filters = num_filters
@@ -31,7 +32,7 @@ class Erosion2D(Layer):
         self.padding = padding
 
         self.kernel_initializer = initializers.get(kernel_initializer)
-	self.kernel_constraint = constraints.get(kernel_constraint)
+        self.kernel_constraint = constraints.get(kernel_constraint)
         # for we are assuming channel last
         self.channel_axis = -1
 
@@ -48,7 +49,7 @@ class Erosion2D(Layer):
         self.kernel = self.add_weight(shape=kernel_shape,
                                       initializer=self.kernel_initializer,
                                       name='kernel',
-				      constraint =self.kernel_constraint)
+                                      constraint=self.kernel_constraint)
 
         # Be sure to call this at the end
         super(Erosion2D, self).build(input_shape)
@@ -60,9 +61,9 @@ class Erosion2D(Layer):
             # so taking min over channel_axis
             out = K.min(
                 self.__erosion2d(x, self.kernel[..., i],
-                                  self.strides, self.padding),
+                                 self.strides, self.padding),
                 axis=self.channel_axis, keepdims=True)
-            
+
             if i == 0:
                 outputs = out
             else:
@@ -86,12 +87,11 @@ class Erosion2D(Layer):
         return (input_shape[0],) + tuple(new_space) + (self.num_filters,)
 
     def __erosion2d(self, x, st_element, strides, padding,
-                     rates=(1, 1, 1, 1)):
+                    rates=(1, 1, 1, 1)):
         # tf.nn.erosion2d(input, filter, strides, rates, padding, name=None)
         x = tf.nn.erosion2d(x, st_element, (1, ) + strides + (1, ),
-                             rates, padding.upper())
+                            rates, padding.upper())
         return x
-
 
 
 class Dilation2D(Layer):
@@ -99,9 +99,10 @@ class Dilation2D(Layer):
     Dilation 2D Layer
     for now assuming channel last
     '''
+
     def __init__(self, num_filters, kernel_size, strides=(1, 1),
                  padding='valid', kernel_initializer='glorot_uniform',
-		 kernel_constraint=None,
+                 kernel_constraint=None,
                  **kwargs):
         super(Dilation2D, self).__init__(**kwargs)
         self.num_filters = num_filters
@@ -110,7 +111,7 @@ class Dilation2D(Layer):
         self.padding = padding
 
         self.kernel_initializer = initializers.get(kernel_initializer)
-	self.kernel_constraint = constraints.get(kernel_constraint)
+        self.kernel_constraint = constraints.get(kernel_constraint)
 
         # for we are assuming channel last
         self.channel_axis = -1
@@ -128,7 +129,7 @@ class Dilation2D(Layer):
         self.kernel = self.add_weight(shape=kernel_shape,
                                       initializer=self.kernel_initializer,
                                       name='kernel',
-				      constraint =self.kernel_constraint)
+                                      constraint=self.kernel_constraint)
 
         # Be sure to call this at the end
         super(Dilation2D, self).build(input_shape)
@@ -142,7 +143,7 @@ class Dilation2D(Layer):
                 self.__dilation2d(x, self.kernel[..., i],
                                   self.strides, self.padding),
                 axis=self.channel_axis, keepdims=True)
-            
+
             if i == 0:
                 outputs = out
             else:
@@ -173,19 +174,19 @@ class Dilation2D(Layer):
         return x
 
 
-
-#w1*C+(1-w)*c
+# w1*C+(1-w)*c
 class CombDense_new(Layer):
     '''
         Weighted sum
     '''
-    def __init__(self,units=1,strides=(1, 1),
+
+    def __init__(self, units=1, strides=(1, 1),
                  kernel_initializer='glorot_uniform',
                  kernel_constraint=None,
                  use_bias=True,
                  **kwargs):
         super(CombDense_new, self).__init__(**kwargs)
-        self.num_node= units
+        self.num_node = units
         self.kernel_initializer = initializers.get(kernel_initializer)
         self.kernel_constraint = constraints.get(kernel_constraint)
         # for we are assuming channel last
@@ -195,50 +196,46 @@ class CombDense_new(Layer):
 
     def build(self, input_shape):
         input_dim = input_shape[-1]
-	"""
+        """
         self.kernel = self.add_weight(shape=(self.units,),
                                       initializer=self.kernel_initializer,
                                       name='kernel',
                                       constraint=self.kernel_constraint)
 	"""
 
-
-
         # Be sure to call this at the end
         super(CombDense_new, self).build(input_shape)
 
     def call(self, x):
-	"""
-	z1=x[0]
-	z2=x[1]
-	w1=x[2]
-	w2=x[3]
+        """
+        z1=x[0]
+        z2=x[1]
+        w1=x[2]
+        w2=x[3]
 
         W1=tf.divide(w1,w1+w2)
         W2=tf.divide(w2,w1+w2)
         z3=W1*z1+W2*z2
-	"""
-	d=self.num_node
-	Z=[]
-	W=[]
-	for i in range(d):
-	    Z.append(x[i])
-	    W.append(x[d+i])   
-        	
-        WS=W[0]
-	for i in range(1,len(W)):
-	    WS=WS+W[i]
+        """
+        d = self.num_node
+        Z = []
+        W = []
+        for i in range(d):
+            Z.append(x[i])
+            W.append(x[d+i])
 
+        WS = W[0]
+        for i in range(1, len(W)):
+            WS = WS+W[i]
 
-	Z3_temp=W[0]*Z[0]	
-	for i in range(1,len(W)):
-	    Z3_temp=Z3_temp+W[i]*Z[i]
-	
-        #Z3=tf.divide(Z3_temp,WS)
-	Z3=Z3_temp/WS
+        Z3_temp = W[0]*Z[0]
+        for i in range(1, len(W)):
+            Z3_temp = Z3_temp+W[i]*Z[i]
+
+        # Z3=tf.divide(Z3_temp,WS)
+        Z3 = Z3_temp/WS
         return Z3
 
     def compute_output_shape(self, input_shape):
-        return (input_shape[0][0],input_shape[0][1],input_shape[0][2],input_shape[0][3])
-        #return (1,input_shape[1],input_shape[2],input_shape[3])
-
+        return (input_shape[0][0], input_shape[0][1], input_shape[0][2], input_shape[0][3])
+        # return (1,input_shape[1],input_shape[2],input_shape[3])
