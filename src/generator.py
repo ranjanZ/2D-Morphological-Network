@@ -36,6 +36,7 @@ def read_image(file_path):
     if(len(Img.shape) == 3):
         Img = rgb2gray(Img)/255.0
 
+
     return Img
 
 
