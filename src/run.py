@@ -115,7 +115,7 @@ def save_all_results(output_path="../data/train_data/results/"):
         L_SCORE.append([s1, p1, s2, p2, s3, p3, s4, p4, s5, p5])
 
     L_SCORE = np.array(L_SCORE)
-    print "average SSIM PSNR :", np.mean(L_SCORE, axis=0)
+    print("average SSIM PSNR :", np.mean(L_SCORE, axis=0))
 
 
 # give input_directory of only rainy images and output_dir
